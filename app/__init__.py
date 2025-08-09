@@ -1,0 +1,1 @@
+# FinDocGPT - AI-Powered Financial Document Analysis & Investment Strategy 
