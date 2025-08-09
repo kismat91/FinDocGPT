@@ -66,6 +66,14 @@ A comprehensive financial analysis platform that combines AI-powered document pr
 
 ## 🔧 Development Setup
 
+### Quick Start (Recommended)
+```bash
+# Start both frontend and backend with one command
+./dev.sh
+```
+
+### Manual Setup
+
 1. **Backend Setup**
    ```bash
    # Create virtual environment
