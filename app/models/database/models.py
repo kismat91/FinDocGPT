@@ -11,7 +11,7 @@ class Document(Base):
     file_type = Column(String, nullable=False)
     upload_date = Column(DateTime(timezone=True), server_default=func.now())
     content = Column(Text)
-    metadata = Column(JSON)
+    meta_data = Column(JSON)
     
 class AnalysisResult(Base):
     __tablename__ = "analysis_results"
