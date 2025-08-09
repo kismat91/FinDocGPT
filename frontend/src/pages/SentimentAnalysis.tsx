@@ -3,10 +3,10 @@ import {
   HeartIcon, 
   FaceSmileIcon,
   FaceFrownIcon,
-  FaceNeutralIcon,
-  TrendingUpIcon,
-  TrendingDownIcon,
-  MinusIcon
+  MinusIcon,
+  ArrowTrendingUpIcon,
+  ArrowTrendingDownIcon,
+  MinusIcon as NeutralIcon
 } from '@heroicons/react/24/outline';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts';
 
@@ -91,18 +91,18 @@ const SentimentAnalysis: React.FC = () => {
       case 'negative':
         return <FaceFrownIcon className="w-6 h-6" />;
       case 'neutral':
-        return <FaceNeutralIcon className="w-6 h-6" />;
+        return <NeutralIcon className="w-6 h-6" />;
       default:
-        return <FaceNeutralIcon className="w-6 h-6" />;
+        return <NeutralIcon className="w-6 h-6" />;
     }
   };
 
   const getTrendIcon = (trend: string) => {
     switch (trend) {
       case 'improving':
-        return <TrendingUpIcon className="w-5 h-5 text-success-600" />;
+        return <ArrowTrendingUpIcon className="w-5 h-5 text-success-600" />;
       case 'declining':
-        return <TrendingDownIcon className="w-5 h-5 text-danger-600" />;
+        return <ArrowTrendingDownIcon className="w-5 h-5 text-danger-600" />;
       case 'stable':
         return <MinusIcon className="w-5 h-5 text-gray-600" />;
       default:

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { 
   ChartBarIcon, 
-  TrendingUpIcon, 
-  TrendingDownIcon,
+  ArrowTrendingUpIcon, 
+  ArrowTrendingDownIcon,
   CurrencyDollarIcon,
   CalendarIcon
 } from '@heroicons/react/24/outline';

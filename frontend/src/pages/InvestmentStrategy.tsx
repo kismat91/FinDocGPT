@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { 
   CurrencyDollarIcon, 
-  TrendingUpIcon, 
-  TrendingDownIcon,
+  ArrowTrendingUpIcon, 
+  ArrowTrendingDownIcon,
   MinusIcon,
   ShieldCheckIcon,
   ExclamationTriangleIcon,
@@ -48,7 +48,7 @@ const InvestmentStrategy: React.FC = () => {
         risk_level: riskTolerance as 'low' | 'medium' | 'high',
         target_price: 150 + Math.random() * 50,
         stop_loss: 120 + Math.random() * 30,
-        time_horizon,
+        time_horizon: timeHorizon,
         factors_considered: [
           'Moving Averages',
           'RSI (Relative Strength Index)',
@@ -85,9 +85,9 @@ const InvestmentStrategy: React.FC = () => {
   const getRecommendationIcon = (recommendation: string) => {
     switch (recommendation) {
       case 'buy':
-        return <TrendingUpIcon className="w-5 h-5" />;
+        return <ArrowTrendingUpIcon className="w-5 h-5" />;
       case 'sell':
-        return <TrendingDownIcon className="w-5 h-5" />;
+        return <ArrowTrendingDownIcon className="w-5 h-5" />;
       case 'hold':
         return <MinusIcon className="w-5 h-5" />;
       default:
@@ -281,7 +281,7 @@ const InvestmentStrategy: React.FC = () => {
                     {strategy.target_price && (
                       <div className="p-4 bg-success-50 rounded-lg">
                         <div className="flex items-center space-x-2">
-                          <TrendingUpIcon className="w-5 h-5 text-success-600" />
+                          <ArrowTrendingUpIcon className="w-5 h-5 text-success-600" />
                           <div>
                             <p className="text-sm text-success-600">Target Price</p>
                             <p className="text-lg font-semibold text-success-900">${strategy.target_price.toFixed(2)}</p>
@@ -292,7 +292,7 @@ const InvestmentStrategy: React.FC = () => {
                     {strategy.stop_loss && (
                       <div className="p-4 bg-danger-50 rounded-lg">
                         <div className="flex items-center space-x-2">
-                          <TrendingDownIcon className="w-5 h-5 text-danger-600" />
+                          <ArrowTrendingDownIcon className="w-5 h-5 text-danger-600" />
                           <div>
                             <p className="text-sm text-danger-600">Stop Loss</p>
                             <p className="text-lg font-semibold text-danger-900">${strategy.stop_loss.toFixed(2)}</p>

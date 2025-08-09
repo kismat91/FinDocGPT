@@ -18,6 +18,7 @@ const Dashboard: React.FC = () => {
       change: '+12%',
       changeType: 'increase',
       icon: DocumentTextIcon,
+      color: 'bg-blue-500',
       href: '/documents'
     },
     {
@@ -26,6 +27,7 @@ const Dashboard: React.FC = () => {
       change: '+8%',
       changeType: 'increase',
       icon: ChartBarIcon,
+      color: 'bg-green-500',
       href: '/forecasting'
     },
     {
@@ -34,6 +36,7 @@ const Dashboard: React.FC = () => {
       change: '+15%',
       changeType: 'increase',
       icon: CurrencyDollarIcon,
+      color: 'bg-yellow-500',
       href: '/strategy'
     },
     {
@@ -42,6 +45,7 @@ const Dashboard: React.FC = () => {
       change: '-3%',
       changeType: 'decrease',
       icon: HeartIcon,
+      color: 'bg-red-500',
       href: '/sentiment'
     }
   ];
