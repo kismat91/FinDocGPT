@@ -1,227 +1,243 @@
-# FinDocGPT - AI-Powered Financial Document Analysis & Investment Strategy
+# 🚀 TradePro - Next-Generation AI-Powered Trading Platform
 
-A comprehensive financial analysis platform that combines AI-powered document processing, market forecasting, and investment strategy recommendations.
+> **Revolutionary trading intelligence powered by artificial intelligence, real-time market data, and advanced analytics.**
 
-## 🚀 Features
+[![TradePro Platform](https://img.shields.io/badge/TradePro-Platform-blue?style=for-the-badge&logo=rocket)](https://tradepro-platform.com)
+[![Next.js](https://img.shields.io/badge/Next.js-15-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.2-blue?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
+[![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
 
-- **Document Analysis**: AI-powered analysis of financial documents (PDF, Excel)
-- **Market Forecasting**: Advanced time series forecasting using machine learning
-- **Investment Strategy**: Data-driven investment recommendations
-- **Sentiment Analysis**: Market sentiment analysis from news and social media
-- **Anomaly Detection**: Identify unusual patterns in financial data
-- **Real-time Data**: Integration with Yahoo Finance and Alpha Vantage APIs
+## 🌟 **Platform Overview**
 
-## 🛠️ Technical Stack
+TradePro is a cutting-edge trading platform that combines **real-time market data**, **AI-powered insights**, and **advanced analytics** to provide traders with the tools they need to make informed decisions in today's fast-paced financial markets.
 
-### Backend
-- **FastAPI** - Modern Python web framework
-- **SQLAlchemy** - Database ORM
-- **SQLite** - Lightweight database
-- **OpenAI GPT** - AI document processing
-- **Scikit-learn** - Machine learning models
-- **Pandas/NumPy** - Data processing
-- **yfinance/Alpha Vantage** - Financial data APIs
+### 🎯 **Key Features**
 
-### Frontend
-- **React 18** - Modern UI framework
-- **TypeScript** - Type safety
-- **Tailwind CSS** - Utility-first styling
-- **Recharts** - Data visualization
-- **Axios** - HTTP client
+- **🚀 Real-Time Market Data** - Live data from global exchanges with millisecond precision
+- **🧠 AI Trading Assistant** - Intelligent market analysis powered by machine learning
+- **📊 Advanced Analytics** - Comprehensive technical indicators and market insights
+- **🌍 Multi-Market Support** - Stocks, Forex, and Cryptocurrency markets
+- **⚡ High Performance** - Optimized for speed and reliability
+- **📱 Responsive Design** - Modern UI that works on all devices
 
-### DevOps
-- **Docker** - Containerization
-- **Nginx** - Reverse proxy
-- **Gunicorn** - Production WSGI server
+## 🏗️ **Architecture & Technology**
 
-## 📋 Prerequisites
+### **Frontend Framework**
+- **Next.js 15** - Latest React framework with App Router
+- **TypeScript** - Type-safe development experience
+- **Tailwind CSS** - Utility-first CSS framework
+- **Framer Motion** - Smooth animations and transitions
 
-- Docker and Docker Compose
-- Node.js 18+ (for local development)
-- Python 3.11+ (for local development)
+### **UI Components**
+- **Radix UI** - Accessible component primitives
+- **shadcn/ui** - Beautiful, customizable components
+- **Custom Design System** - Modern glassmorphism and gradient effects
 
-## 🚀 Quick Start (Production)
+### **Data & Analytics**
+- **Chart.js** - Interactive charts and visualizations
+- **Recharts** - Advanced data visualization
+- **Real-time APIs** - Live market data integration
+
+### **AI & Machine Learning**
+- **LangChain** - AI framework integration
+- **Groq API** - High-performance LLM inference
+- **TensorFlow.js** - Client-side ML capabilities
+
+## 🚀 **Getting Started**
+
+### **Prerequisites**
+- Node.js 18+ 
+- npm 8+ or yarn
+- Modern web browser
+
+### **Installation**
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/FinDocGPT.git
-   cd FinDocGPT
+   git clone https://github.com/tradepro/trading-platform.git
+   cd trading-platform
    ```
 
-2. **Configure environment variables**
+2. **Install dependencies**
    ```bash
-   cp env.example .env
-   # Edit .env with your API keys and settings
-   ```
-
-3. **Deploy with Docker**
-   ```bash
-   ./deploy.sh
-   ```
-
-4. **Access the application**
-   - Frontend: http://localhost:3000
-   - Backend API: http://localhost:8000
-   - API Documentation: http://localhost:8000/docs
-
-## 🔧 Development Setup
-
-### Quick Start (Recommended)
-```bash
-# Start both frontend and backend with one command
-./dev.sh
-```
-
-### Manual Setup
-
-1. **Backend Setup**
-   ```bash
-   # Create virtual environment
-   python -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
-   
-   # Install dependencies
-   pip install -r requirements.txt
-   
-   # Initialize database
-   python init_db.py
-   
-   # Run development server
-   python -m uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
-   ```
-
-2. **Frontend Setup**
-   ```bash
-   cd frontend
    npm install
-   npm start
+   # or
+   yarn install
    ```
 
-## 🔑 Environment Variables
+3. **Set up environment variables**
+   ```bash
+   cp .env.example .env.local
+   ```
+   
+   Configure your API keys:
+   ```env
+   # Required APIs
+   NEXT_PUBLIC_NEWSAPI_KEY=your_newsapi_key
+   TWELVE_DATA_API_KEY=your_twelvedata_key
+   NEXT_PUBLIC_GROK_API_KEY=your_groq_api_key
+   
+   # Optional Enhanced Features
+   YAHOO_FINANCE_API_KEY=your_yahoo_finance_key
+   ALPHA_VANTAGE_API_KEY=your_alpha_vantage_key
+   NEPSE_API_KEY=your_nepse_key
+   ```
 
-Create a `.env` file with the following variables:
+4. **Start development server**
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   ```
 
-```env
-# Required API Keys
-OPENAI_API_KEY=your_openai_api_key
-ALPHA_VANTAGE_API_KEY=your_alpha_vantage_api_key
+5. **Open your browser**
+   Navigate to [http://localhost:3000](http://localhost:3000)
 
-# Security
-SECRET_KEY=your_secret_key_here
-ALGORITHM=HS256
-ACCESS_TOKEN_EXPIRE_MINUTES=30
+## 📱 **Available Scripts**
 
-# Database
-DATABASE_URL=sqlite:///./findocgpt.db
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Start development server |
+| `npm run build` | Build for production |
+| `npm run start` | Start production server |
+| `npm run lint` | Run ESLint |
+| `npm run type-check` | Run TypeScript type checking |
+| `npm run test` | Run test suite |
+| `npm run analyze` | Analyze bundle size |
 
-# CORS Settings
-ALLOWED_ORIGINS=http://localhost:3000,http://127.0.0.1:3000
+## 🌐 **Platform Features**
 
-# Production Settings
-ENVIRONMENT=production
-DEBUG=False
-LOG_LEVEL=INFO
-```
+### **📈 Market Analysis**
+- **Real-time Stock Data** - Live prices, volume, and technical indicators
+- **Forex Intelligence** - Currency pair analysis with market sentiment
+- **Crypto Analytics** - Digital asset insights and exchange data
+- **Technical Indicators** - RSI, MACD, Bollinger Bands, and more
 
-## 📊 API Endpoints
+### **🤖 AI Trading Assistant**
+- **Intelligent Insights** - AI-powered market analysis and predictions
+- **Risk Assessment** - Automated risk scoring and portfolio optimization
+- **Trading Strategies** - Personalized recommendations based on market conditions
+- **Market Sentiment** - Real-time sentiment analysis from news and social media
 
-### Core Endpoints
-- `GET /health` - Health check
-- `GET /` - API information
+### **📊 Advanced Analytics**
+- **Interactive Charts** - Professional-grade charting with multiple timeframes
+- **Portfolio Tracking** - Comprehensive portfolio management and analysis
+- **Performance Metrics** - Detailed performance analytics and reporting
+- **Risk Management** - Advanced risk assessment and mitigation tools
 
-### Document Analysis
-- `POST /api/v1/documents/upload` - Upload financial documents
-- `POST /api/v1/analysis/qa` - Document Q&A
-- `POST /api/v1/analysis/anomaly` - Anomaly detection
+### **🌍 Global Market Coverage**
+- **US Markets** - NYSE, NASDAQ, and other major exchanges
+- **International Markets** - Global stock exchanges and indices
+- **Forex Markets** - Major, minor, and exotic currency pairs
+- **Cryptocurrency** - Leading digital assets and DeFi tokens
 
-### Financial Forecasting
-- `POST /api/v1/forecast/` - Generate market forecasts
-- `GET /api/v1/forecast/history` - Get forecast history
+## 🔧 **API Integration**
 
-### Investment Strategy
-- `POST /api/v1/strategy/recommend` - Get investment recommendations
-- `GET /api/v1/strategy/portfolio` - Portfolio analysis
+### **Market Data Providers**
+- **Twelve Data** - Real-time stock, forex, and crypto data
+- **Yahoo Finance** - Comprehensive financial data and news
+- **NewsAPI** - Financial news and market updates
+- **Local Markets** - Regional exchange data (NEPSE, etc.)
 
-### Sentiment Analysis
-- `POST /api/v1/sentiment/analyze` - Analyze market sentiment
+### **AI Services**
+- **Groq API** - High-performance language model inference
+- **LangChain** - AI framework for intelligent analysis
+- **TensorFlow.js** - Client-side machine learning
 
-## 🐳 Docker Commands
+## 🎨 **Design System**
 
+### **Modern UI/UX**
+- **Glassmorphism Effects** - Modern backdrop blur and transparency
+- **Gradient System** - Rich color gradients for visual appeal
+- **Responsive Design** - Mobile-first approach with modern breakpoints
+- **Dark/Light Themes** - Automatic theme switching with system preference
+
+### **Interactive Elements**
+- **Smooth Animations** - Framer Motion powered transitions
+- **Hover Effects** - Engaging interactive states
+- **Loading States** - Beautiful loading animations
+- **Error Handling** - User-friendly error messages
+
+## 📱 **Responsive Design**
+
+- **Mobile First** - Optimized for mobile devices
+- **Tablet Support** - Enhanced tablet layouts
+- **Desktop Experience** - Rich desktop experience with modern effects
+- **Cross-Platform** - Consistent experience across all devices
+
+## 🚀 **Deployment**
+
+### **Vercel (Recommended)**
 ```bash
-# Build and start all services
-docker-compose up -d
-
-# View logs
-docker-compose logs -f
-
-# Stop services
-docker-compose down
-
-# Rebuild services
-docker-compose build --no-cache
-
-# Update and restart
-docker-compose pull && docker-compose up -d
+npm install -g vercel
+vercel
 ```
 
-## 🔒 Security Features
-
-- **Rate Limiting**: API rate limiting via Nginx
-- **CORS Protection**: Configured CORS policies
-- **Security Headers**: XSS protection, content type validation
-- **Input Validation**: Pydantic models for data validation
-- **Error Handling**: Global exception handling
-- **Logging**: Comprehensive logging system
-
-## 📈 Monitoring
-
-- **Health Checks**: Built-in health check endpoints
-- **Logging**: Structured logging with rotation
-- **Metrics**: Request/response monitoring
-- **Error Tracking**: Global exception handling
-
-## 🚀 Production Deployment
-
-### Using Docker Compose (Recommended)
+### **Docker**
 ```bash
-./deploy.sh
+docker build -t tradepro-platform .
+docker run -p 3000:3000 tradepro-platform
 ```
 
-### Manual Deployment
-1. Set up a production server
-2. Install Docker and Docker Compose
-3. Configure environment variables
-4. Run `docker-compose up -d`
+### **Traditional Hosting**
+```bash
+npm run build
+npm run start
+```
 
-### SSL/HTTPS Setup
-1. Obtain SSL certificates
-2. Place certificates in `./ssl/` directory
-3. Uncomment HTTPS server block in `nginx.conf`
-4. Update domain name in nginx configuration
+## 🔒 **Security Features**
 
-## 🤝 Contributing
+- **API Rate Limiting** - Protected against abuse
+- **Input Validation** - Secure data handling
+- **HTTPS Only** - Secure communication
+- **Environment Variables** - Secure configuration management
 
+## 🤝 **Contributing**
+
+We welcome contributions from the community! Please read our [Contributing Guidelines](CONTRIBUTING.md) before submitting pull requests.
+
+### **Development Setup**
 1. Fork the repository
 2. Create a feature branch
 3. Make your changes
 4. Add tests if applicable
 5. Submit a pull request
 
-## 📝 License
+### **Code Standards**
+- TypeScript for type safety
+- ESLint for code quality
+- Prettier for code formatting
+- Conventional commits for commit messages
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+## 📄 **License**
 
-## 🆘 Support
+This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
 
-For support and questions:
-- Create an issue on GitHub
-- Check the API documentation at `/docs`
-- Review the logs for debugging information
+## 🙏 **Acknowledgments**
 
-## 🔄 Updates
+- **Next.js Team** - For the amazing React framework
+- **Vercel** - For hosting and deployment
+- **Tailwind CSS** - For the utility-first CSS framework
+- **Radix UI** - For accessible component primitives
+- **Open Source Community** - For the incredible tools and libraries
 
-To update the application:
-```bash
-git pull origin main
-./deploy.sh
-```
+## 📞 **Support & Contact**
+
+- **Documentation**: [docs.tradepro-platform.com](https://docs.tradepro-platform.com)
+- **Issues**: [GitHub Issues](https://github.com/tradepro/trading-platform/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/tradepro/trading-platform/discussions)
+- **Email**: support@tradepro-platform.com
+
+## 🌟 **Star History**
+
+[![Star History Chart](https://api.star-history.com/svg?repos=tradepro/trading-platform&type=Date)](https://star-history.com/#tradepro/trading-platform&Date)
+
+---
+
+<div align="center">
+
+**Made with ❤️ by the TradePro Team**
+
+[![TradePro](https://img.shields.io/badge/TradePro-Platform-blue?style=for-the-badge&logo=rocket)](https://tradepro-platform.com)
+
+</div>
