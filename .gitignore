@@ -126,4 +126,17 @@ coverage/
 
 # Misc
 *.tgz
-*.tar.gz 
+*.tar.gz
+
+# Python Backend
+python_backend/__pycache__/
+python_backend/*.pyc
+python_backend/.env
+python_backend/chroma_db/
+python_backend/faiss_index/
+python_backend/uploads/
+python_backend/*.log
+
+# API Keys (additional protection)
+env.api.keys
+*.env 

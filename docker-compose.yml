@@ -1,0 +1,65 @@
+version: '3.8'
+
+services:
+  # Next.js Frontend
+  findocgpt-frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - TWELVE_DATA_API_KEY=${TWELVE_DATA_API_KEY}
+      - GROQ_API_KEY=${GROQ_API_KEY}
+      - NEXT_PUBLIC_NEWSAPI_KEY=${NEXT_PUBLIC_NEWSAPI_KEY}
+    volumes:
+      - .:/app
+      - /app/node_modules
+    depends_on:
+      - findocgpt-backend
+    networks:
+      - findocgpt-network
+
+  # Python Backend
+  findocgpt-backend:
+    build:
+      context: ./python_backend
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - GROQ_API_KEY=${GROQ_API_KEY}
+      - CHROMA_DB_PATH=/app/chroma_db
+      - FAISS_INDEX_PATH=/app/faiss_index
+      - HOST=0.0.0.0
+      - PORT=8000
+      - DEBUG=true
+      - LOG_LEVEL=info
+    volumes:
+      - ./python_backend:/app
+      - chroma_data:/app/chroma_db
+      - faiss_data:/app/faiss_index
+    networks:
+      - findocgpt-network
+
+  # Redis for caching (optional)
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - findocgpt-network
+
+volumes:
+  chroma_data:
+  faiss_data:
+  redis_data:
+
+networks:
+  findocgpt-network:
+    driver: bridge
