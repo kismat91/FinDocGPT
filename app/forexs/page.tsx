@@ -12,22 +12,45 @@ interface ForexPair {
 }
 
 export default function ForexsPage() {
-  const [forexPairs, setForexPairs] = useState<ForexPair[]>([]);
-  const [loading, setLoading] = useState(true);
+  console.log("🚀 ForexsPage component rendering");
+  
+  // Initialize with test data directly
+  const [forexPairs, setForexPairs] = useState<ForexPair[]>([
+    {
+      symbol: "EUR/USD",
+      name: "Euro / US Dollar",
+      price: 1.0850,
+      change: 0.0025,
+      changePercent: 0.23
+    },
+    {
+      symbol: "GBP/USD", 
+      name: "British Pound / US Dollar",
+      price: 1.2650,
+      change: -0.0012,
+      changePercent: -0.09
+    },
+    {
+      symbol: "USD/JPY",
+      name: "US Dollar / Japanese Yen", 
+      price: 149.85,
+      change: 0.45,
+      changePercent: 0.30
+    }
+  ]);
+  const [loading, setLoading] = useState(false); // Set to false since we have data
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedPair, setSelectedPair] = useState<ForexPair | null>(null);
   const [showModal, setShowModal] = useState(false);
 
-  useEffect(() => {
-    fetchForexData();
-  }, []);
+  console.log("� Direct State - forexPairs length:", forexPairs.length);
+  console.log("� Direct State - loading:", loading);
 
   const fetchForexData = async () => {
     try {
       console.log("🚀 Starting forex API call...");
       const response = await fetch("/api/forexs");
       console.log("🔍 Response status:", response.status);
-      console.log("🔍 Response headers:", response.headers);
       
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -35,9 +58,7 @@ export default function ForexsPage() {
       
       const data = await response.json();
       console.log("🔍 Forex API Response:", data);
-      console.log("🔍 Response type:", typeof data);
       console.log("🔍 Data.pairs:", data.pairs);
-      console.log("🔍 Array.isArray(data):", Array.isArray(data));
       console.log("🔍 Array.isArray(data.pairs):", Array.isArray(data.pairs));
       
       if (data.pairs && Array.isArray(data.pairs)) {
@@ -61,6 +82,12 @@ export default function ForexsPage() {
       pair.name.toLowerCase().includes(searchTerm.toLowerCase())
     )
   );
+  
+  console.log("📊 Forex State Debug:");
+  console.log("📊 forexPairs length:", forexPairs.length);
+  console.log("📊 filteredPairs length:", filteredPairs.length);
+  console.log("📊 searchTerm:", searchTerm);
+  console.log("📊 loading:", loading);
 
   const handleViewDetails = (pair: ForexPair) => {
     setSelectedPair(pair);
