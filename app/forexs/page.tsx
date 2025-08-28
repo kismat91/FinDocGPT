@@ -24,15 +24,32 @@ export default function ForexsPage() {
 
   const fetchForexData = async () => {
     try {
+      console.log("🚀 Starting forex API call...");
       const response = await fetch("/api/forexs");
+      console.log("🔍 Response status:", response.status);
+      console.log("🔍 Response headers:", response.headers);
+      
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      
       const data = await response.json();
       console.log("🔍 Forex API Response:", data);
       console.log("🔍 Response type:", typeof data);
       console.log("🔍 Data.pairs:", data.pairs);
       console.log("🔍 Array.isArray(data):", Array.isArray(data));
-      setForexPairs(data.pairs || []);
+      console.log("🔍 Array.isArray(data.pairs):", Array.isArray(data.pairs));
+      
+      if (data.pairs && Array.isArray(data.pairs)) {
+        console.log("✅ Setting forex pairs:", data.pairs.length, "pairs");
+        setForexPairs(data.pairs);
+      } else {
+        console.log("❌ No valid pairs data found");
+        setForexPairs([]);
+      }
     } catch (error) {
-      console.error("Error fetching forex data:", error);
+      console.error("❌ Error fetching forex data:", error);
+      setForexPairs([]);
     } finally {
       setLoading(false);
     }
