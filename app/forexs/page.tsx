@@ -14,34 +14,17 @@ interface ForexPair {
 export default function ForexsPage() {
   console.log("🚀 ForexsPage component rendering");
   
-  // Initialize with test data directly
-  const [forexPairs, setForexPairs] = useState<ForexPair[]>([
-    {
-      symbol: "EUR/USD",
-      name: "Euro / US Dollar",
-      price: 1.0850,
-      change: 0.0025,
-      changePercent: 0.23
-    },
-    {
-      symbol: "GBP/USD", 
-      name: "British Pound / US Dollar",
-      price: 1.2650,
-      change: -0.0012,
-      changePercent: -0.09
-    },
-    {
-      symbol: "USD/JPY",
-      name: "US Dollar / Japanese Yen", 
-      price: 149.85,
-      change: 0.45,
-      changePercent: 0.30
-    }
-  ]);
-  const [loading, setLoading] = useState(false); // Set to false since we have data
+  const [forexPairs, setForexPairs] = useState<ForexPair[]>([]);
+  const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedPair, setSelectedPair] = useState<ForexPair | null>(null);
   const [showModal, setShowModal] = useState(false);
+
+  // Fetch data from API on component mount
+  useEffect(() => {
+    console.log("🔥 useEffect triggered - fetching forex data from API");
+    fetchForexData();
+  }, []);
 
   console.log("� Direct State - forexPairs length:", forexPairs.length);
   console.log("� Direct State - loading:", loading);
