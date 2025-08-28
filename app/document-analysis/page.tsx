@@ -25,10 +25,12 @@ export default function DocumentAnalysisPage() {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const analysisTypes = [
-    { value: 'general', label: 'General Analysis', description: 'Comprehensive financial document review' },
-    { value: 'earnings', label: 'Earnings Report', description: 'Quarterly/annual earnings analysis' },
-    { value: 'balance_sheet', label: 'Balance Sheet', description: 'Assets, liabilities, and equity analysis' },
-    { value: 'cash_flow', label: 'Cash Flow', description: 'Operating, investing, and financing analysis' }
+    { value: 'enhanced-document-analysis', label: 'Enhanced Analysis', description: 'AI-powered comprehensive document review' },
+    { value: 'financial-analysis', label: 'Financial Analysis', description: 'Deep financial metrics and performance analysis' },
+    { value: 'risk-assessment', label: 'Risk Assessment', description: 'Comprehensive risk evaluation and scoring' },
+    { value: 'compliance-check', label: 'Compliance Check', description: 'Regulatory compliance verification' },
+    { value: 'forecasting', label: 'Forecasting', description: 'AI-powered financial forecasting and predictions' },
+    { value: 'multi-agent-analysis', label: 'Multi-Agent Analysis', description: 'Coordinated AI agents for comprehensive insights' }
   ];
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {

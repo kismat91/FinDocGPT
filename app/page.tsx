@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Chatbot from "@/components/chatbot";
 
 interface MarketData {
   stocks: number;
@@ -161,6 +162,9 @@ export default function Home() {
           </div>
         </div>
       </div>
+
+      {/* AI Chatbot */}
+      <Chatbot />
     </div>
   );
 }
