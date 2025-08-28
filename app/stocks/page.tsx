@@ -24,22 +24,45 @@ export default function StocksPage() {
 
   const fetchStocks = async () => {
     try {
-      const response = await fetch("/api/stocks");
-      const data = await response.json();
-      setStocks(data);
+      console.log('🚀 Fetching stocks from TEST API...');
+      const response = await fetch("/api/stocks-test");
+      console.log('📡 API response status:', response.status);
+      console.log('📡 API response headers:', response.headers);
+      
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      
+      const rawText = await response.text();
+      console.log('📄 Raw response text:', rawText);
+      
+      const data = JSON.parse(rawText);
+      console.log('📊 API response data:', data);
+      console.log('📈 Number of stocks received:', data.length);
+      console.log('🔍 Data type:', typeof data, Array.isArray(data));
+      console.log('🎯 First stock:', data[0]);
+      
+      if (Array.isArray(data) && data.length > 0) {
+        setStocks(data);
+        console.log('✅ Successfully set stocks:', data.length);
+      } else {
+        console.warn('⚠️ No stocks in response or not an array');
+        setStocks([]);
+      }
     } catch (error) {
-      console.error("Error fetching stocks:", error);
+      console.error("❌ Error fetching stocks:", error);
+      setStocks([]); // Set empty array on error
     } finally {
       setLoading(false);
     }
   };
 
-  const filteredStocks = stocks.filter(stock =>
-    stock.symbol && stock.name && (
-      stock.symbol.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      stock.name.toLowerCase().includes(searchTerm.toLowerCase())
-    )
-  );
+  // Show all stocks without filtering for now to debug
+  const filteredStocks = stocks;
+  
+  console.log('🏁 Final render - All stocks:', stocks);
+  console.log('🎯 Final render - Filtered stocks:', filteredStocks);
+  console.log('🔍 Final render - Search term:', searchTerm);
 
   const handleViewDetails = (stock: Stock) => {
     setSelectedStock(stock);

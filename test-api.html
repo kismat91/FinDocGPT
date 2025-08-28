@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test API</title>
+</head>
+<body>
+    <h1>Testing FinDocGPT APIs</h1>
+    <button onclick="testStocks()">Test Stocks API</button>
+    <button onclick="testForex()">Test Forex API</button>
+    <button onclick="testCrypto()">Test Crypto API</button>
+    <pre id="result"></pre>
+
+    <script>
+        async function testStocks() {
+            try {
+                const response = await fetch('/api/stocks');
+                const data = await response.json();
+                document.getElementById('result').textContent = 'Stocks API Response:\n' + JSON.stringify(data, null, 2);
+            } catch (error) {
+                document.getElementById('result').textContent = 'Stocks API Error: ' + error.message;
+            }
+        }
+
+        async function testForex() {
+            try {
+                const response = await fetch('/api/forexs');
+                const data = await response.json();
+                document.getElementById('result').textContent = 'Forex API Response:\n' + JSON.stringify(data, null, 2);
+            } catch (error) {
+                document.getElementById('result').textContent = 'Forex API Error: ' + error.message;
+            }
+        }
+
+        async function testCrypto() {
+            try {
+                const response = await fetch('/api/cryptos');
+                const data = await response.json();
+                document.getElementById('result').textContent = 'Crypto API Response:\n' + JSON.stringify(data, null, 2);
+            } catch (error) {
+                document.getElementById('result').textContent = 'Crypto API Error: ' + error.message;
+            }
+        }
+    </script>
+</body>
+</html>

@@ -26,6 +26,10 @@ export default function ForexsPage() {
     try {
       const response = await fetch("/api/forexs");
       const data = await response.json();
+      console.log("🔍 Forex API Response:", data);
+      console.log("🔍 Response type:", typeof data);
+      console.log("🔍 Data.pairs:", data.pairs);
+      console.log("🔍 Array.isArray(data):", Array.isArray(data));
       setForexPairs(data.pairs || []);
     } catch (error) {
       console.error("Error fetching forex data:", error);
