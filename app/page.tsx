@@ -58,6 +58,7 @@ export default function Home() {
               <Link href="/stocks" className="text-white/80 hover:text-white transition-colors">Stocks</Link>
               <Link href="/forexs" className="text-white/80 hover:text-white transition-colors">Forex</Link>
               <Link href="/cryptos" className="text-white/80 hover:text-white transition-colors">Crypto</Link>
+              <Link href="/sec-filings" className="text-white/80 hover:text-white transition-colors">SEC Filings</Link>
               <Link href="/news" className="text-white/80 hover:text-white transition-colors">News</Link>
               <Link href="/document-analysis" className="text-white/80 hover:text-white transition-colors">Documents</Link>
               <Link href="/forecasting" className="text-white/80 hover:text-white transition-colors">Forecasting</Link>
@@ -118,6 +119,13 @@ export default function Home() {
             <div className="bg-gradient-to-br from-orange-600 to-orange-800 rounded-lg p-6 hover:scale-105 transition-transform duration-300">
               <h3 className="text-xl font-semibold text-white mb-2">₿ Crypto Markets</h3>
               <p className="text-orange-100">Digital asset analysis and portfolio tracking</p>
+            </div>
+          </Link>
+          
+          <Link href="/sec-filings" className="group">
+            <div className="bg-gradient-to-br from-red-600 to-red-800 rounded-lg p-6 hover:scale-105 transition-transform duration-300">
+              <h3 className="text-xl font-semibold text-white mb-2">📋 SEC Filings</h3>
+              <p className="text-red-100">AI-powered 10-K analysis and company insights</p>
             </div>
           </Link>
           
