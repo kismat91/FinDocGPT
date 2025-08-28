@@ -642,13 +642,13 @@ def generate_mock_chat_response(query: str, ticker: str) -> str:
 
 if __name__ == "__main__":
     print("🚀 Starting FinDocGPT AI Backend...")
-    print("📍 API Documentation: http://localhost:8000/docs")
+    print("📍 API Documentation: http://localhost:8001/docs")
     print("🔗 Frontend Integration: http://localhost:3001")
     print("✅ CORS enabled for frontend communication")
     print("📊 SEC Filings Analysis: Available")
     
     uvicorn.run(
-        app, 
+        "main_simple:app", 
         host="0.0.0.0", 
         port=8001,  # Changed to port 8001 to match frontend
         reload=True,
