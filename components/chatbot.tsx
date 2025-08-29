@@ -45,7 +45,7 @@ export default function Chatbot({ className = "" }: ChatbotProps) {
     {
       id: '1',
       type: 'bot',
-      content: 'Hello! I\'m your AI Financial Assistant. I can help you with:\n\n• 📄 Document Analysis (PDFs, financial reports)\n• 📊 Risk Assessment\n• 📈 Financial Forecasting\n• ⚖️ Compliance Checking\n• 💼 Portfolio Analysis\n• 🔍 Multi-Agent Analysis\n\nYou can upload documents or ask me questions about financial markets!\n\n💬 Try typing a message below or click the quick action buttons!',
+      content: 'Hello! I\'m your AI Financial Assistant. I can help you with:\n\n• Document Analysis (PDFs, financial reports)\n• Risk Assessment\n• Financial Forecasting\n• Compliance Checking\n• Portfolio Analysis\n• Multi-Agent Analysis\n\nYou can upload documents or ask me questions about financial markets!\n\nTry typing a message below or click the quick action buttons!',
       timestamp: new Date()
     }
   ]);
@@ -231,11 +231,11 @@ Would you like me to perform additional analysis on this document?`;
 
   const quickActions = [
     { 
-      label: "📄 Analyze Document", 
+      label: "Analyze Document", 
       action: () => fileInputRef.current?.click() 
     },
     { 
-      label: "🛡️ Risk Assessment", 
+      label: "Risk Assessment", 
       action: () => {
         setCurrentMessage("Perform risk assessment on current market conditions");
         // Automatically send the message
@@ -245,7 +245,7 @@ Would you like me to perform additional analysis on this document?`;
       }
     },
     { 
-      label: "📈 Market Forecast", 
+      label: "Market Forecast", 
       action: () => {
         setCurrentMessage("What's your forecast for the next quarter?");
         setTimeout(() => {
@@ -254,7 +254,7 @@ Would you like me to perform additional analysis on this document?`;
       }
     },
     { 
-      label: "⚖️ Compliance Check", 
+      label: "Compliance Check", 
       action: () => {
         setCurrentMessage("Help me check compliance requirements");
         setTimeout(() => {

@@ -83,7 +83,7 @@ export default function CryptosPage() {
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-6 py-8">
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-white mb-4">₿ Crypto Markets</h1>
+          <h1 className="text-4xl font-bold text-white mb-4">Crypto Markets</h1>
           <p className="text-xl text-white/80">Digital asset analysis and portfolio tracking</p>
         </div>
 

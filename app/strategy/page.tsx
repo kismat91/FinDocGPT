@@ -127,7 +127,7 @@ export default function StrategyPage() {
 
         {/* Strategy Form */}
         <div className="bg-white/10 backdrop-blur-sm rounded-lg p-8 border border-white/20 mb-8">
-          <h2 className="text-2xl font-semibold text-white mb-6">📊 Your Investment Profile</h2>
+          <h2 className="text-2xl font-semibold text-white mb-6">Your Investment Profile</h2>
           
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Risk Profile */}
@@ -252,7 +252,7 @@ export default function StrategyPage() {
                     Generating Strategy...
                   </>
                   ) : (
-                  '🚀 Generate AI Strategy'
+                  'Generate AI Strategy'
                 )}
               </button>
               
@@ -277,7 +277,7 @@ export default function StrategyPage() {
         {/* Strategy Results */}
         {strategyResult && (
           <div className="bg-white/10 backdrop-blur-sm rounded-lg p-8 border border-white/20">
-            <h2 className="text-2xl font-semibold text-white mb-6">🤖 AI-Generated Investment Strategy</h2>
+            <h2 className="text-2xl font-semibold text-white mb-6">AI-Generated Investment Strategy</h2>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
               <div className="bg-white/10 rounded-lg p-4">
@@ -297,7 +297,7 @@ export default function StrategyPage() {
             </div>
 
             <div className="bg-white/10 rounded-lg p-6">
-              <h3 className="text-white font-semibold mb-4">📊 Comprehensive Strategy Report</h3>
+              <h3 className="text-white font-semibold mb-4">Comprehensive Strategy Report</h3>
               <div className="prose prose-invert max-w-none">
                 <div className="text-white/90 whitespace-pre-wrap">{strategyResult.strategy}</div>
               </div>

@@ -216,7 +216,7 @@ export default function NewsPage() {
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-6 py-8">
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-white mb-4">📰 Market News</h1>
+          <h1 className="text-4xl font-bold text-white mb-4">Market News</h1>
           <p className="text-xl text-white/80">Real-time financial news and market updates</p>
         </div>
 
@@ -267,7 +267,7 @@ export default function NewsPage() {
                     </span>
                     {isArticleSaved(item.id) && (
                       <span className="bg-green-500/20 text-green-300 text-xs px-2 py-1 rounded-full flex items-center gap-1">
-                        <span>💾</span> Saved
+                        <span>Saved</span>
                       </span>
                     )}
                   </div>
@@ -351,7 +351,7 @@ export default function NewsPage() {
 
               {fullArticle && fullArticle.success && (
                 <div className="mb-6">
-                  <h3 className="text-xl font-semibold text-white mb-4">📄 Full Article</h3>
+                  <h3 className="text-xl font-semibold text-white mb-4">Full Article</h3>
                   
                   {/* Images */}
                   {fullArticle.images && fullArticle.images.length > 0 && (
@@ -389,7 +389,7 @@ export default function NewsPage() {
                     {fullArticle.extractionQuality === 'limited' && (
                       <div className="mt-4 p-3 bg-yellow-500/10 border border-yellow-500/20 rounded-lg">
                         <p className="text-yellow-300 text-sm">
-                          ⚠️ Limited content extracted. For the complete article, please visit the original source.
+                          Limited content extracted. For the complete article, please visit the original source.
                         </p>
                       </div>
                     )}
@@ -399,7 +399,7 @@ export default function NewsPage() {
 
               {!loadingFullArticle && (!fullArticle || !fullArticle.success || !fullArticle.content) && (
                 <div className="bg-yellow-500/10 border border-yellow-500/20 rounded-lg p-4 mb-6">
-                  <h3 className="text-lg font-semibold text-yellow-300 mb-2">⚠️ Full Content Not Available</h3>
+                  <h3 className="text-lg font-semibold text-yellow-300 mb-2">Full Content Not Available</h3>
                   <p className="text-white/70 mb-4">
                     We couldn't extract the full article content from this source. This might be due to the website's structure or content protection measures.
                   </p>
@@ -415,7 +415,7 @@ export default function NewsPage() {
               )}
               
               <div className="bg-white/10 rounded-lg p-6 mb-6">
-                <h3 className="text-xl font-semibold text-white mb-4">📊 Market Impact Analysis</h3>
+                <h3 className="text-xl font-semibold text-white mb-4">Market Impact Analysis</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <h4 className="text-white/80 font-medium mb-2">Potential Impact</h4>
@@ -433,7 +433,6 @@ export default function NewsPage() {
                   onClick={handleShareArticle}
                   className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white py-3 px-6 rounded-lg transition-colors duration-300 flex items-center gap-2"
                 >
-                  <span>📤</span>
                   Share Article
                 </button>
                 <button 
@@ -444,7 +443,6 @@ export default function NewsPage() {
                       : 'bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white'
                   }`}
                 >
-                  <span>{selectedNews && isArticleSaved(selectedNews.id) ? '🗑️' : '💾'}</span>
                   {selectedNews && isArticleSaved(selectedNews.id) ? 'Remove from Portfolio' : 'Save to Portfolio'}
                 </button>
                 <a 

@@ -107,7 +107,7 @@ export default function ForexsPage() {
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-6 py-8">
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-white mb-4">💱 Forex Trading</h1>
+          <h1 className="text-4xl font-bold text-white mb-4">Forex Trading</h1>
           <p className="text-xl text-white/80">Currency pair analysis and market sentiment</p>
         </div>
 

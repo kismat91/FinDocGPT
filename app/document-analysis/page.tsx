@@ -176,13 +176,13 @@ export default function DocumentAnalysisPage() {
       {/* Main Content */}
       <div className="max-w-6xl mx-auto px-6 py-8">
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-white mb-4">📄 Document AI Analysis</h1>
+          <h1 className="text-4xl font-bold text-white mb-4">Document AI Analysis</h1>
           <p className="text-xl text-white/80">AI-powered financial document analysis with Q&A capabilities</p>
         </div>
 
         {/* File Upload Section */}
         <div className="bg-white/10 backdrop-blur-sm rounded-lg p-8 border border-white/20 mb-8">
-          <h2 className="text-2xl font-semibold text-white mb-6">📤 Upload Document</h2>
+          <h2 className="text-2xl font-semibold text-white mb-6">Upload Document</h2>
           
           {/* Drag & Drop Zone */}
           <div
@@ -274,7 +274,7 @@ export default function DocumentAnalysisPage() {
         {/* Analysis Results */}
         {analysisResult && (
           <div className="bg-white/10 backdrop-blur-sm rounded-lg p-8 border border-white/20 mb-8">
-            <h2 className="text-2xl font-semibold text-white mb-6">📊 Analysis Results</h2>
+            <h2 className="text-2xl font-semibold text-white mb-6">Analysis Results</h2>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
               <div className="bg-white/10 rounded-lg p-4">
@@ -301,7 +301,7 @@ export default function DocumentAnalysisPage() {
             {/* Note Display */}
             {analysisResult.note && (
               <div className="mt-4 p-4 bg-yellow-500/20 border border-yellow-500/30 rounded-lg">
-                <p className="text-yellow-300 text-sm">⚠️ {analysisResult.note}</p>
+                                        <p className="text-yellow-300 text-sm">{analysisResult.note}</p>
               </div>
             )}
           </div>

@@ -71,7 +71,7 @@ export default function Home() {
       {/* Hero Section */}
       <div className="text-center py-20 px-6">
         <h1 className="text-6xl font-bold text-white mb-6">
-          🚀 FinDocGPT Platform
+          FinDocGPT Platform
         </h1>
         <p className="text-xl text-white/80 mb-12 max-w-3xl mx-auto">
           AI-Powered Financial Intelligence Platform with Real-Time Market Data, 
@@ -81,19 +81,19 @@ export default function Home() {
         {/* Status Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto mb-12">
           <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 border border-white/20">
-            <h3 className="text-2xl font-semibold text-white mb-2">✅ Platform Status</h3>
+            <h3 className="text-2xl font-semibold text-white mb-2">Platform Status</h3>
             <p className="text-green-400 font-semibold">ACTIVE & RUNNING</p>
             <p className="text-white/70 text-sm mt-2">All systems operational</p>
           </div>
           
           <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 border border-white/20">
-            <h3 className="text-2xl font-semibold text-white mb-2">🔑 Services</h3>
+            <h3 className="text-2xl font-semibold text-white mb-2">Services</h3>
             <p className="text-green-400 font-semibold">CONNECTED</p>
             <p className="text-white/70 text-sm mt-2">All APIs configured</p>
           </div>
           
           <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 border border-white/20">
-            <h3 className="text-2xl font-semibold text-white mb-2">🌐 Access</h3>
+            <h3 className="text-2xl font-semibold text-white mb-2">Access</h3>
             <p className="text-blue-400 font-semibold">READY</p>
             <p className="text-white/70 text-sm mt-2">Platform accessible</p>
           </div>
@@ -103,49 +103,49 @@ export default function Home() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
           <Link href="/stocks" className="group">
             <div className="bg-gradient-to-br from-blue-600 to-blue-800 rounded-lg p-6 hover:scale-105 transition-transform duration-300">
-              <h3 className="text-xl font-semibold text-white mb-2">📈 Stock Analysis</h3>
+              <h3 className="text-xl font-semibold text-white mb-2">Stock Analysis</h3>
               <p className="text-blue-100">Real-time stock data, technical analysis, and AI insights</p>
             </div>
           </Link>
           
           <Link href="/forexs" className="group">
             <div className="bg-gradient-to-br from-green-600 to-green-800 rounded-lg p-6 hover:scale-105 transition-transform duration-300">
-              <h3 className="text-xl font-semibold text-white mb-2">💱 Forex Trading</h3>
+              <h3 className="text-xl font-semibold text-white mb-2">Forex Trading</h3>
               <p className="text-green-100">Currency pair analysis and market sentiment</p>
             </div>
           </Link>
           
           <Link href="/cryptos" className="group">
             <div className="bg-gradient-to-br from-orange-600 to-orange-800 rounded-lg p-6 hover:scale-105 transition-transform duration-300">
-              <h3 className="text-xl font-semibold text-white mb-2">₿ Crypto Markets</h3>
+              <h3 className="text-xl font-semibold text-white mb-2">Crypto Markets</h3>
               <p className="text-orange-100">Digital asset analysis and portfolio tracking</p>
             </div>
           </Link>
           
           <Link href="/sec-filings" className="group">
             <div className="bg-gradient-to-br from-red-600 to-red-800 rounded-lg p-6 hover:scale-105 transition-transform duration-300">
-              <h3 className="text-xl font-semibold text-white mb-2">📋 SEC Filings</h3>
+              <h3 className="text-xl font-semibold text-white mb-2">SEC Filings</h3>
               <p className="text-red-100">AI-powered 10-K analysis and company insights</p>
             </div>
           </Link>
           
           <Link href="/news" className="group">
             <div className="bg-gradient-to-br from-purple-600 to-purple-800 rounded-lg p-6 hover:scale-105 transition-transform duration-300">
-              <h3 className="text-xl font-semibold text-white mb-2">📰 Market News</h3>
+              <h3 className="text-xl font-semibold text-white mb-2">Market News</h3>
               <p className="text-purple-100">Real-time financial news and market updates</p>
             </div>
           </Link>
           
           <Link href="/document-analysis" className="group">
             <div className="bg-gradient-to-br from-pink-600 to-pink-800 rounded-lg p-6 hover:scale-105 transition-transform duration-300">
-              <h3 className="text-xl font-semibold text-white mb-2">📄 Document AI</h3>
+              <h3 className="text-xl font-semibold text-white mb-2">Document AI</h3>
               <p className="text-pink-100">AI-powered financial document analysis</p>
             </div>
           </Link>
           
           <Link href="/forecasting" className="group">
             <div className="bg-gradient-to-br from-indigo-600 to-indigo-800 rounded-lg p-6 hover:scale-105 transition-transform duration-300">
-              <h3 className="text-xl font-semibold text-white mb-2">🔮 AI Forecasting</h3>
+              <h3 className="text-xl font-semibold text-white mb-2">AI Forecasting</h3>
               <p className="text-indigo-100">Machine learning market predictions</p>
             </div>
           </Link>
@@ -153,7 +153,7 @@ export default function Home() {
 
         {/* Market Stats */}
         <div className="mt-12 bg-white/10 backdrop-blur-sm rounded-lg p-6 border border-white/20 max-w-4xl mx-auto">
-          <h2 className="text-2xl font-semibold text-white mb-4">📊 Live Market Coverage</h2>
+          <h2 className="text-2xl font-semibold text-white mb-4">Live Market Coverage</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="text-center">
               <div className="text-3xl font-bold text-blue-400">{marketData.stocks.toLocaleString()}</div>

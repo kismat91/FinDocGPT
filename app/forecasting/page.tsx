@@ -36,25 +36,25 @@ export default function ForecastingPage() {
       value: 'trend_analysis', 
       label: 'Trend Analysis', 
       description: 'Market direction and momentum analysis',
-      icon: '📈'
+              icon: ''
     },
     { 
       value: 'price_prediction', 
       label: 'Price Prediction', 
       description: 'Specific price targets and levels',
-      icon: '🎯'
+      icon: ''
     },
     { 
       value: 'volatility_forecast', 
       label: 'Volatility Forecast', 
       description: 'Expected market volatility and risk',
-      icon: '📊'
+              icon: ''
     },
     { 
       value: 'earnings_forecast', 
       label: 'Earnings Forecast', 
       description: 'Revenue and profit projections',
-      icon: '💰'
+      icon: ''
     }
   ];
 
@@ -143,13 +143,13 @@ export default function ForecastingPage() {
       {/* Main Content */}
       <div className="max-w-6xl mx-auto px-6 py-8">
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-white mb-4">🔮 AI Forecasting</h1>
+          <h1 className="text-4xl font-bold text-white mb-4">AI Forecasting</h1>
           <p className="text-xl text-white/80">Machine learning market predictions and trend analysis</p>
         </div>
 
         {/* Forecast Configuration */}
         <div className="bg-white/10 backdrop-blur-sm rounded-lg p-8 border border-white/20 mb-8">
-          <h2 className="text-2xl font-semibold text-white mb-6">⚙️ Forecast Configuration</h2>
+          <h2 className="text-2xl font-semibold text-white mb-6">Forecast Configuration</h2>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
             {/* Symbol Input */}
@@ -229,7 +229,7 @@ export default function ForecastingPage() {
                   Generating Forecast...
                 </>
               ) : (
-                '🔮 Generate Forecast'
+                'Generate Forecast'
               )}
             </button>
             
@@ -254,7 +254,7 @@ export default function ForecastingPage() {
         {/* Forecast Results */}
         {forecastResult && (
           <div className="bg-white/10 backdrop-blur-sm rounded-lg p-8 border border-white/20">
-            <h2 className="text-2xl font-semibold text-white mb-6">📊 Forecast Results</h2>
+            <h2 className="text-2xl font-semibold text-white mb-6">Forecast Results</h2>
             
             {/* Forecast Header */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
@@ -288,13 +288,13 @@ export default function ForecastingPage() {
 
             {/* Risk Assessment */}
             <div className="bg-white/10 rounded-lg p-4 mb-6">
-              <h3 className="text-white font-semibold mb-2">⚠️ Risk Assessment</h3>
+                              <h3 className="text-white font-semibold mb-2">Risk Assessment</h3>
               <p className="text-white/90">{forecastResult.riskAssessment}</p>
             </div>
 
             {/* AI Forecast */}
             <div className="bg-white/10 rounded-lg p-6">
-              <h3 className="text-white font-semibold mb-4">🤖 AI Forecast Analysis</h3>
+              <h3 className="text-white font-semibold mb-4">AI Forecast Analysis</h3>
               <div className="prose prose-invert max-w-none">
                 <div className="text-white/90 whitespace-pre-wrap">{forecastResult.forecast}</div>
               </div>
@@ -303,7 +303,7 @@ export default function ForecastingPage() {
             {/* Disclaimer */}
             <div className="mt-6 p-4 bg-yellow-500/20 border border-yellow-500/30 rounded-lg">
               <p className="text-yellow-300 text-sm">
-                ⚠️ <strong>Disclaimer:</strong> This AI-generated forecast is for informational purposes only and should not be considered as financial advice. 
+                <strong>Disclaimer:</strong> This AI-generated forecast is for informational purposes only and should not be considered as financial advice. 
                 Always conduct your own research and consult with financial professionals before making investment decisions.
               </p>
             </div>

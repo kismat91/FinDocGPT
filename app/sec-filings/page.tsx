@@ -340,25 +340,25 @@ export default function SECFilingsPage() {
 
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                       <div className="text-center p-4 bg-muted rounded-lg">
-                        <div className="text-2xl font-bold">
+                        <div className="text-2xl font-bold text-gray-800 dark:text-white">
                           {companyData.financialSnapshot.peRatio}
                         </div>
                         <div className="text-sm text-muted-foreground">P/E Ratio</div>
                       </div>
                       <div className="text-center p-4 bg-muted rounded-lg">
-                        <div className="text-2xl font-bold">
+                        <div className="text-2xl font-bold text-gray-800 dark:text-white">
                           {companyData.financialSnapshot.roe}
                         </div>
                         <div className="text-sm text-muted-foreground">ROE</div>
                       </div>
                       <div className="text-center p-4 bg-muted rounded-lg">
-                        <div className="text-2xl font-bold">
+                        <div className="text-2xl font-bold text-gray-800 dark:text-white">
                           {companyData.financialSnapshot.debtToEquity}
                         </div>
                         <div className="text-sm text-muted-foreground">Debt/Equity</div>
                       </div>
                       <div className="text-center p-4 bg-muted rounded-lg">
-                        <div className="text-2xl font-bold">
+                        <div className="text-2xl font-bold text-gray-800 dark:text-white">
                           {companyData.financialSnapshot.currentRatio}
                         </div>
                         <div className="text-sm text-muted-foreground">Current Ratio</div>
@@ -380,9 +380,9 @@ export default function SECFilingsPage() {
                     <CardContent>
                       <ul className="space-y-3">
                         {companyData.bullCase.map((point, index) => (
-                          <li key={index} className="flex items-start gap-2">
+                          <li key={index} className="flex items-start gap-2 p-2 bg-green-100 dark:bg-green-800/30 border border-green-200 dark:border-green-600 rounded-lg">
                             <div className="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0" />
-                            <span className="text-sm">{point}</span>
+                            <span className="text-sm text-gray-800 dark:text-white font-medium">{point}</span>
                           </li>
                         ))}
                       </ul>
@@ -399,9 +399,9 @@ export default function SECFilingsPage() {
                     <CardContent>
                       <ul className="space-y-3">
                         {companyData.bearCase.map((point, index) => (
-                          <li key={index} className="flex items-start gap-2">
+                          <li key={index} className="flex items-start gap-2 p-2 bg-red-100 dark:bg-red-800/30 border border-red-200 dark:border-red-600 rounded-lg">
                             <div className="w-2 h-2 bg-red-500 rounded-full mt-2 flex-shrink-0" />
-                            <span className="text-sm">{point}</span>
+                            <span className="text-sm text-gray-800 dark:text-white font-medium">{point}</span>
                           </li>
                         ))}
                       </ul>
@@ -421,9 +421,9 @@ export default function SECFilingsPage() {
                   <CardContent>
                     <div className="space-y-4">
                       {companyData.keyRisks.map((risk, index) => (
-                        <div key={index} className="flex items-start gap-3 p-3 bg-orange-50 dark:bg-orange-950/20 rounded-lg">
-                          <AlertTriangle className="h-5 w-5 text-orange-500 mt-0.5 flex-shrink-0" />
-                          <span className="text-sm">{risk}</span>
+                        <div key={index} className="flex items-start gap-3 p-3 bg-orange-100 dark:bg-orange-800/40 border border-orange-200 dark:border-orange-600 rounded-lg">
+                          <AlertTriangle className="h-5 w-5 text-orange-600 dark:text-orange-400 mt-0.5 flex-shrink-0" />
+                          <span className="text-sm text-gray-800 dark:text-white font-medium">{risk}</span>
                         </div>
                       ))}
                     </div>

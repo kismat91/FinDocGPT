@@ -99,7 +99,7 @@ export default function StocksPage() {
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-6 py-8">
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-white mb-4">📈 Stock Market Analysis</h1>
+          <h1 className="text-4xl font-bold text-white mb-4">Stock Market Analysis</h1>
           <p className="text-xl text-white/80">Real-time stock data and market insights</p>
         </div>
 

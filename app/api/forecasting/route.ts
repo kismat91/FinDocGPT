@@ -75,6 +75,8 @@ export async function POST(request: Request) {
       structuredForecast: structuredForecast,
       symbol: symbol,
       timeframe: timeframe,
+      confidenceScore: structuredForecast.confidence,
+      riskAssessment: `Risk Score: ${structuredForecast.riskScore}/10 - ${structuredForecast.marketTrend} trend with ${structuredForecast.riskFactors.length} risk factors identified.`,
       timestamp: new Date().toISOString()
     });
 
@@ -90,40 +92,46 @@ export async function POST(request: Request) {
 function createForecastingPrompt(symbol: string, timeframe: string, analysisType: string, includeSectorAnalysis: boolean, riskTolerance: string): string {
   return `As a certified financial analyst and AI forecasting expert, provide a comprehensive market forecast for ${symbol} over ${timeframe}.
 
-Please provide a structured forecast in the following JSON format:
+Please provide a structured forecast in the following JSON format. Ensure all values are properly formatted as valid JSON:
 
 {
   "symbol": "${symbol}",
   "timeframe": "${timeframe}",
   "pricePrediction": {
-    "shortTerm": number,
-    "mediumTerm": number,
-    "longTerm": number
+    "shortTerm": 145.50,
+    "mediumTerm": 148.20,
+    "longTerm": 152.50
   },
-  "confidence": number (0-100),
+  "confidence": 85,
   "riskFactors": ["factor1", "factor2"],
-  "marketTrend": "Bullish|Bearish|Neutral|Volatile",
+  "marketTrend": "Bullish",
   "sectorAnalysis": {
-    "sector": "string",
-    "trend": "string",
-    "strength": number (1-10)
+    "sector": "Technology",
+    "trend": "Bullish",
+    "strength": 8
   },
   "technicalIndicators": {
-    "rsi": number,
-    "macd": "string",
-    "support": number,
-    "resistance": number
+    "rsi": 55,
+    "macd": "Buy",
+    "support": 140.50,
+    "resistance": 150.20
   },
   "fundamentalFactors": {
-    "peRatio": number,
-    "debtToEquity": number,
-    "growthRate": number,
-    "marketCap": number
+    "peRatio": 25.12,
+    "debtToEquity": 0.12,
+    "growthRate": 12.5,
+    "marketCap": 2.35
   },
-  "riskScore": number (1-10),
+  "riskScore": 4,
   "anomalies": ["anomaly1", "anomaly2"],
   "recommendations": ["recommendation1", "recommendation2"]
 }
+
+IMPORTANT: 
+- Use only numbers for numeric values (no "T", "B", "M", "%" symbols)
+- Ensure all JSON is valid and properly formatted
+- No trailing commas
+- All strings must be in double quotes
 
 Focus on:
 1. Technical analysis and price patterns
@@ -141,10 +149,26 @@ Provide realistic, data-driven forecasts with clear risk assessments.`;
 
 function parseForecastResponse(aiResponse: string, symbol: string, timeframe: string): MarketForecast {
   try {
-    // Try to extract JSON from the AI response
-    const jsonMatch = aiResponse.match(/\{[\s\S]*\}/);
+    // Try to extract JSON from the AI response - look for JSON content between { and }
+    // Use a more robust pattern that handles multiline content
+    const jsonMatch = aiResponse.match(/\{[\s\S]*?\}/s);
     if (jsonMatch) {
-      const parsed = JSON.parse(jsonMatch[0]);
+      let jsonStr = jsonMatch[0];
+      console.log('Extracted JSON string:', jsonStr);
+      
+      // Clean up common JSON formatting issues
+      jsonStr = jsonStr
+        .replace(/(\d+\.\d+[TBMK])/g, '"$1"') // Wrap values like 2.35T in quotes
+        .replace(/(\d+\.\d+%)/g, '"$1"') // Wrap values like 10.50% in quotes
+        .replace(/(\d+\.\d+[A-Z]+)/g, '"$1"') // Wrap other similar values
+        .replace(/,\s*}/g, '}') // Remove trailing commas
+        .replace(/,\s*]/g, ']'); // Remove trailing commas in arrays
+      
+      console.log('Cleaned JSON string:', jsonStr);
+      
+      const parsed = JSON.parse(jsonStr);
+      console.log('Parsed forecast data:', parsed);
+      
       return {
         symbol: parsed.symbol || symbol,
         timeframe: parsed.timeframe || timeframe,
@@ -179,10 +203,18 @@ function parseForecastResponse(aiResponse: string, symbol: string, timeframe: st
       };
     }
   } catch (error) {
-    console.log('Failed to parse AI forecast response as JSON, using fallback parsing');
+    console.log('Failed to parse AI forecast response as JSON:', error);
+    console.log('AI Response:', aiResponse);
   }
 
-  // Fallback parsing if JSON extraction fails
+  // Fallback parsing: extract key values directly from text
+  console.log('Using fallback text parsing');
+  const fallbackData = parseForecastFromText(aiResponse, symbol, timeframe);
+  if (fallbackData) {
+    return fallbackData;
+  }
+
+  // Final fallback if all parsing methods fail
   return {
     symbol: symbol,
     timeframe: timeframe,
@@ -215,6 +247,95 @@ function parseForecastResponse(aiResponse: string, symbol: string, timeframe: st
     anomalies: ['Unable to detect anomalies'],
     recommendations: ['Further research recommended']
   };
+}
+
+function parseForecastFromText(text: string, symbol: string, timeframe: string): MarketForecast | null {
+  try {
+    // Extract confidence score
+    const confidenceMatch = text.match(/"confidence":\s*(\d+)/);
+    const confidence = confidenceMatch ? parseInt(confidenceMatch[1]) : 50;
+    
+    // Extract risk score
+    const riskScoreMatch = text.match(/"riskScore":\s*(\d+)/);
+    const riskScore = riskScoreMatch ? parseInt(riskScoreMatch[1]) : 5;
+    
+    // Extract market trend
+    const trendMatch = text.match(/"marketTrend":\s*"([^"]+)"/);
+    const marketTrend = trendMatch ? trendMatch[1] : 'Neutral';
+    
+    // Extract risk factors
+    const riskFactorsMatch = text.match(/"riskFactors":\s*\[([^\]]+)\]/);
+    const riskFactors = riskFactorsMatch ? 
+      riskFactorsMatch[1].split(',').map(f => f.trim().replace(/"/g, '')) : 
+      ['Analysis incomplete'];
+    
+    // Extract sector
+    const sectorMatch = text.match(/"sector":\s*"([^"]+)"/);
+    const sector = sectorMatch ? sectorMatch[1] : 'Unknown';
+    
+    // Extract RSI
+    const rsiMatch = text.match(/"rsi":\s*(\d+(?:\.\d+)?)/);
+    const rsi = rsiMatch ? parseFloat(rsiMatch[1]) : 50;
+    
+    // Extract support and resistance
+    const supportMatch = text.match(/"support":\s*(\d+(?:\.\d+)?)/);
+    const support = supportMatch ? parseFloat(supportMatch[1]) : 0;
+    
+    const resistanceMatch = text.match(/"resistance":\s*(\d+(?:\.\d+)?)/);
+    const resistance = resistanceMatch ? parseFloat(resistanceMatch[1]) : 0;
+    
+    // Extract P/E ratio
+    const peMatch = text.match(/"peRatio":\s*(\d+(?:\.\d+)?)/);
+    const peRatio = peMatch ? parseFloat(peMatch[1]) : 0;
+    
+    // Extract price predictions
+    const shortTermMatch = text.match(/"shortTerm":\s*(\d+(?:\.\d+)?)/);
+    const shortTerm = shortTermMatch ? parseFloat(shortTermMatch[1]) : 0;
+    
+    const mediumTermMatch = text.match(/"mediumTerm":\s*(\d+(?:\.\d+)?)/);
+    const mediumTerm = mediumTermMatch ? parseFloat(mediumTermMatch[1]) : 0;
+    
+    const longTermMatch = text.match(/"longTerm":\s*(\d+(?:\.\d+)?)/);
+    const longTerm = longTermMatch ? parseFloat(longTermMatch[1]) : 0;
+    
+    console.log('Fallback parsing extracted:', { confidence, riskScore, marketTrend, sector, rsi, support, resistance, peRatio, shortTerm, mediumTerm, longTerm });
+    
+    return {
+      symbol,
+      timeframe,
+      pricePrediction: {
+        shortTerm,
+        mediumTerm,
+        longTerm
+      },
+      confidence,
+      riskFactors,
+      marketTrend: marketTrend as any,
+      sectorAnalysis: {
+        sector,
+        trend: marketTrend,
+        strength: 5
+      },
+      technicalIndicators: {
+        rsi,
+        macd: 'Neutral',
+        support,
+        resistance
+      },
+      fundamentalFactors: {
+        peRatio,
+        debtToEquity: 0.12,
+        growthRate: 10.0,
+        marketCap: 2.0
+      },
+      riskScore,
+      anomalies: ['Extracted from text analysis'],
+      recommendations: ['Based on text analysis']
+    };
+  } catch (error) {
+    console.log('Fallback text parsing failed:', error);
+    return null;
+  }
 }
 
 async function generateForecastWithGroq(prompt: string, apiKey: string): Promise<string> {
