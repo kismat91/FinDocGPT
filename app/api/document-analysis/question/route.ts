@@ -13,7 +13,7 @@ export async function POST(request: Request) {
     }
 
     // Check if Groq API key is configured
-    const groqApiKey = process.env.NEXT_PUBLIC_GROK_API_KEY;
+    const groqApiKey = process.env.GROQ_API_KEY;
     if (!groqApiKey) {
       return NextResponse.json(
         { error: 'Groq API key not configured' },

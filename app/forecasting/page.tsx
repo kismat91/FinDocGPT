@@ -8,10 +8,47 @@ interface ForecastResult {
   symbol: string;
   timeframe: string;
   forecastType: string;
-  forecast: string;
-  confidenceScore: number;
-  riskAssessment: string;
-  timestamp: string;
+  analysis?: {
+    trendDirection: string;
+    confidence: number;
+    keyLevels: {
+      support: number;
+      resistance: number;
+      current: number;
+    };
+    momentum: string;
+    technicalIndicators: {
+      rsi: number;
+      macd: string;
+      movingAverages: string;
+      bollingerBands: string;
+    };
+  };
+  predictions?: {
+    shortTerm: string;
+    mediumTerm: string;
+    longTerm: string;
+  };
+  riskFactors?: string[];
+  recommendations?: string[];
+  marketContext?: {
+    sectorOutlook: string;
+    marketSentiment: string;
+    economicFactors: string;
+    sectorRotation: string;
+  };
+  priceTargets?: {
+    conservative: number;
+    baseCase: number;
+    bullCase: number;
+    bearCase: number;
+  };
+  volatilityMetrics?: {
+    currentVolatility: number;
+    predictedVolatility: number;
+    volatilityTrend: string;
+    vixCorrelation: number;
+  };
 }
 
 export default function ForecastingPage() {
@@ -277,27 +314,207 @@ export default function ForecastingPage() {
               
               <div className="bg-white/10 rounded-lg p-4 text-center">
                 <h3 className="text-white/70 text-sm mb-1">Confidence</h3>
-                <p className={`font-bold text-lg ${getConfidenceColor(forecastResult.confidenceScore)}`}>
-                  {forecastResult.confidenceScore}%
+                <p className={`font-bold text-lg ${getConfidenceColor((forecastResult.analysis?.confidence || 0) * 100)}`}>
+                  {Math.round((forecastResult.analysis?.confidence || 0) * 100)}%
                 </p>
-                <p className={`text-xs ${getConfidenceColor(forecastResult.confidenceScore)}`}>
-                  {getConfidenceLabel(forecastResult.confidenceScore)}
+                <p className={`text-xs ${getConfidenceColor((forecastResult.analysis?.confidence || 0) * 100)}`}>
+                  {getConfidenceLabel((forecastResult.analysis?.confidence || 0) * 100)}
                 </p>
               </div>
             </div>
 
             {/* Risk Assessment */}
-            <div className="bg-white/10 rounded-lg p-4 mb-6">
-                              <h3 className="text-white font-semibold mb-2">Risk Assessment</h3>
-              <p className="text-white/90">{forecastResult.riskAssessment}</p>
-            </div>
-
-            {/* AI Forecast */}
-            <div className="bg-white/10 rounded-lg p-6">
-              <h3 className="text-white font-semibold mb-4">AI Forecast Analysis</h3>
-              <div className="prose prose-invert max-w-none">
-                <div className="text-white/90 whitespace-pre-wrap">{forecastResult.forecast}</div>
+            {forecastResult.riskFactors && forecastResult.riskFactors.length > 0 && (
+              <div className="bg-white/10 rounded-lg p-4 mb-6">
+                <h3 className="text-white font-semibold mb-2">Risk Assessment</h3>
+                <ul className="text-white/90 space-y-1">
+                  {forecastResult.riskFactors.map((risk, index) => (
+                    <li key={index} className="flex items-start">
+                      <span className="text-red-400 mr-2">•</span>
+                      <span>{risk}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
+            )}
+
+            {/* AI Forecast Analysis */}
+            <div className="bg-white/10 rounded-lg p-6 mb-6">
+              <h3 className="text-white font-semibold mb-4">AI Forecast Analysis</h3>
+              
+              {/* Trend Analysis */}
+              {forecastResult.analysis && (
+                <div className="space-y-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <h4 className="text-white font-medium mb-2">Trend Direction</h4>
+                      <p className={`text-lg font-semibold ${
+                        forecastResult.analysis.trendDirection === 'Bullish' ? 'text-green-400' : 
+                        forecastResult.analysis.trendDirection === 'Bearish' ? 'text-red-400' : 'text-yellow-400'
+                      }`}>
+                        {forecastResult.analysis.trendDirection}
+                      </p>
+                    </div>
+                    <div>
+                      <h4 className="text-white font-medium mb-2">Momentum</h4>
+                      <p className="text-white/90">{forecastResult.analysis.momentum}</p>
+                    </div>
+                  </div>
+
+                  {/* Key Levels */}
+                  <div>
+                    <h4 className="text-white font-medium mb-2">Key Levels</h4>
+                    <div className="grid grid-cols-3 gap-4">
+                      <div className="text-center">
+                        <p className="text-white/70 text-sm">Support</p>
+                        <p className="text-red-400 font-semibold">${forecastResult.analysis.keyLevels.support}</p>
+                      </div>
+                      <div className="text-center">
+                        <p className="text-white/70 text-sm">Current</p>
+                        <p className="text-white font-semibold">${forecastResult.analysis.keyLevels.current}</p>
+                      </div>
+                      <div className="text-center">
+                        <p className="text-white/70 text-sm">Resistance</p>
+                        <p className="text-green-400 font-semibold">${forecastResult.analysis.keyLevels.resistance}</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Technical Indicators */}
+                  <div>
+                    <h4 className="text-white font-medium mb-2">Technical Indicators</h4>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <p className="text-white/70 text-sm">RSI</p>
+                        <p className="text-white">{forecastResult.analysis.technicalIndicators.rsi}</p>
+                      </div>
+                      <div>
+                        <p className="text-white/70 text-sm">MACD</p>
+                        <p className="text-white">{forecastResult.analysis.technicalIndicators.macd}</p>
+                      </div>
+                      <div>
+                        <p className="text-white/70 text-sm">Moving Averages</p>
+                        <p className="text-white">{forecastResult.analysis.technicalIndicators.movingAverages}</p>
+                      </div>
+                      <div>
+                        <p className="text-white/70 text-sm">Bollinger Bands</p>
+                        <p className="text-white">{forecastResult.analysis.technicalIndicators.bollingerBands}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Predictions */}
+              {forecastResult.predictions && (
+                <div className="mt-6">
+                  <h4 className="text-white font-medium mb-3">Predictions</h4>
+                  <div className="space-y-2">
+                    <div>
+                      <p className="text-white/70 text-sm">Short-term (1-2 weeks)</p>
+                      <p className="text-white/90">{forecastResult.predictions.shortTerm}</p>
+                    </div>
+                    <div>
+                      <p className="text-white/70 text-sm">Medium-term (1-3 months)</p>
+                      <p className="text-white/90">{forecastResult.predictions.mediumTerm}</p>
+                    </div>
+                    <div>
+                      <p className="text-white/70 text-sm">Long-term (3-12 months)</p>
+                      <p className="text-white/90">{forecastResult.predictions.longTerm}</p>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Price Targets */}
+              {forecastResult.priceTargets && (
+                <div className="mt-6">
+                  <h4 className="text-white font-medium mb-3">Price Targets</h4>
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div className="text-center">
+                      <p className="text-white/70 text-sm">Conservative</p>
+                      <p className="text-yellow-400 font-semibold">${forecastResult.priceTargets.conservative}</p>
+                    </div>
+                    <div className="text-center">
+                      <p className="text-white/70 text-sm">Base Case</p>
+                      <p className="text-white font-semibold">${forecastResult.priceTargets.baseCase}</p>
+                    </div>
+                    <div className="text-center">
+                      <p className="text-white/70 text-sm">Bull Case</p>
+                      <p className="text-green-400 font-semibold">${forecastResult.priceTargets.bullCase}</p>
+                    </div>
+                    <div className="text-center">
+                      <p className="text-white/70 text-sm">Bear Case</p>
+                      <p className="text-red-400 font-semibold">${forecastResult.priceTargets.bearCase}</p>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Volatility Metrics */}
+              {forecastResult.volatilityMetrics && (
+                <div className="mt-6">
+                  <h4 className="text-white font-medium mb-3">Volatility Analysis</h4>
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div className="text-center">
+                      <p className="text-white/70 text-sm">Current Volatility</p>
+                      <p className="text-white font-semibold">{(forecastResult.volatilityMetrics.currentVolatility * 100).toFixed(1)}%</p>
+                    </div>
+                    <div className="text-center">
+                      <p className="text-white/70 text-sm">Predicted Volatility</p>
+                      <p className="text-white font-semibold">{(forecastResult.volatilityMetrics.predictedVolatility * 100).toFixed(1)}%</p>
+                    </div>
+                    <div className="text-center">
+                      <p className="text-white/70 text-sm">Trend</p>
+                      <p className="text-white">{forecastResult.volatilityMetrics.volatilityTrend}</p>
+                    </div>
+                    <div className="text-center">
+                      <p className="text-white/70 text-sm">VIX Correlation</p>
+                      <p className="text-white">{(forecastResult.volatilityMetrics.vixCorrelation * 100).toFixed(0)}%</p>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Market Context */}
+              {forecastResult.marketContext && (
+                <div className="mt-6">
+                  <h4 className="text-white font-medium mb-3">Market Context</h4>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <p className="text-white/70 text-sm">Sector Outlook</p>
+                      <p className="text-white/90">{forecastResult.marketContext.sectorOutlook}</p>
+                    </div>
+                    <div>
+                      <p className="text-white/70 text-sm">Market Sentiment</p>
+                      <p className="text-white/90">{forecastResult.marketContext.marketSentiment}</p>
+                    </div>
+                    <div>
+                      <p className="text-white/70 text-sm">Economic Factors</p>
+                      <p className="text-white/90">{forecastResult.marketContext.economicFactors}</p>
+                    </div>
+                    <div>
+                      <p className="text-white/70 text-sm">Sector Rotation</p>
+                      <p className="text-white/90">{forecastResult.marketContext.sectorRotation}</p>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Recommendations */}
+              {forecastResult.recommendations && forecastResult.recommendations.length > 0 && (
+                <div className="mt-6">
+                  <h4 className="text-white font-medium mb-3">Recommendations</h4>
+                  <ul className="text-white/90 space-y-1">
+                    {forecastResult.recommendations.map((rec, index) => (
+                      <li key={index} className="flex items-start">
+                        <span className="text-blue-400 mr-2">•</span>
+                        <span>{rec}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </div>
 
             {/* Disclaimer */}
@@ -311,7 +528,7 @@ export default function ForecastingPage() {
             {/* Timestamp */}
             <div className="mt-4 text-center">
               <p className="text-white/50 text-sm">
-                Generated on: {new Date(forecastResult.timestamp).toLocaleString()}
+                Generated on: {new Date().toLocaleString()}
               </p>
             </div>
           </div>

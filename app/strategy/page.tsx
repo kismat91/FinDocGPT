@@ -5,11 +5,31 @@ import Link from "next/link";
 
 interface StrategyResult {
   success: boolean;
-  strategy: string;
-  riskProfile: string;
-  investmentGoals: string;
-  timeHorizon: string;
-  timestamp: string;
+  strategyType: string;
+  riskLevel: string;
+  investmentAmount: number;
+  allocation?: {
+    stocks: number;
+    bonds: number;
+    cash: number;
+    alternatives?: number;
+  };
+  recommendations?: string[];
+  expectedReturn?: string;
+  riskTolerance?: string;
+  timeHorizon?: string;
+  diversification?: {
+    geographic: string;
+    sector: string;
+    assetClass: string;
+  };
+  rebalancing?: string;
+  monitoring?: string;
+  riskFactors?: string[];
+  taxConsiderations?: string[];
+  riskProfile?: string;
+  investmentGoals?: string;
+  timestamp?: string;
 }
 
 export default function StrategyPage() {
@@ -279,28 +299,137 @@ export default function StrategyPage() {
           <div className="bg-white/10 backdrop-blur-sm rounded-lg p-8 border border-white/20">
             <h2 className="text-2xl font-semibold text-white mb-6">AI-Generated Investment Strategy</h2>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-              <div className="bg-white/10 rounded-lg p-4">
-                <h3 className="text-white font-semibold mb-2">Risk Profile</h3>
-                <p className="text-white/70 text-sm">{strategyResult.riskProfile}</p>
+            {/* Strategy Overview */}
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+              <div className="bg-white/10 rounded-lg p-4 text-center">
+                <h3 className="text-white font-semibold mb-2">Strategy Type</h3>
+                <p className="text-white/70 text-sm">{strategyResult.strategyType}</p>
               </div>
               
-              <div className="bg-white/10 rounded-lg p-4">
-                <h3 className="text-white font-semibold mb-2">Investment Goals</h3>
-                <p className="text-white/70 text-sm">{strategyResult.investmentGoals}</p>
+              <div className="bg-white/10 rounded-lg p-4 text-center">
+                <h3 className="text-white font-semibold mb-2">Risk Level</h3>
+                <p className="text-white/70 text-sm">{strategyResult.riskLevel}</p>
               </div>
               
-              <div className="bg-white/10 rounded-lg p-4">
-                <h3 className="text-white font-semibold mb-2">Time Horizon</h3>
-                <p className="text-white/70 text-sm">{strategyResult.timeHorizon}</p>
+              <div className="bg-white/10 rounded-lg p-4 text-center">
+                <h3 className="text-white font-semibold mb-2">Expected Return</h3>
+                <p className="text-white/70 text-sm">{strategyResult.expectedReturn || 'N/A'}</p>
+              </div>
+              
+              <div className="bg-white/10 rounded-lg p-4 text-center">
+                <h3 className="text-white font-semibold mb-2">Investment Amount</h3>
+                <p className="text-white/70 text-sm">${strategyResult.investmentAmount?.toLocaleString() || 'N/A'}</p>
               </div>
             </div>
 
-            <div className="bg-white/10 rounded-lg p-6">
-              <h3 className="text-white font-semibold mb-4">Comprehensive Strategy Report</h3>
-              <div className="prose prose-invert max-w-none">
-                <div className="text-white/90 whitespace-pre-wrap">{strategyResult.strategy}</div>
+            {/* Asset Allocation */}
+            {strategyResult.allocation && (
+              <div className="bg-white/10 rounded-lg p-6 mb-6">
+                <h3 className="text-white font-semibold mb-4">📊 Asset Allocation</h3>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                  <div className="text-center">
+                    <div className="text-2xl font-bold text-blue-400">{strategyResult.allocation.stocks}%</div>
+                    <div className="text-white/70 text-sm">Stocks</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-2xl font-bold text-green-400">{strategyResult.allocation.bonds}%</div>
+                    <div className="text-white/70 text-sm">Bonds</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-2xl font-bold text-yellow-400">{strategyResult.allocation.cash}%</div>
+                    <div className="text-white/70 text-sm">Cash</div>
+                  </div>
+                  {strategyResult.allocation.alternatives && (
+                    <div className="text-center">
+                      <div className="text-2xl font-bold text-purple-400">{strategyResult.allocation.alternatives}%</div>
+                      <div className="text-white/70 text-sm">Alternatives</div>
+                    </div>
+                  )}
+                </div>
               </div>
+            )}
+
+            {/* Diversification Strategy */}
+            {strategyResult.diversification && (
+              <div className="bg-white/10 rounded-lg p-6 mb-6">
+                <h3 className="text-white font-semibold mb-4">🌍 Diversification Strategy</h3>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div>
+                    <h4 className="text-white font-medium mb-2">Geographic</h4>
+                    <p className="text-white/70 text-sm">{strategyResult.diversification.geographic}</p>
+                  </div>
+                  <div>
+                    <h4 className="text-white font-medium mb-2">Sector Focus</h4>
+                    <p className="text-white/70 text-sm">{strategyResult.diversification.sector}</p>
+                  </div>
+                  <div>
+                    <h4 className="text-white font-medium mb-2">Asset Classes</h4>
+                    <p className="text-white/70 text-sm">{strategyResult.diversification.assetClass}</p>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Investment Recommendations */}
+            {strategyResult.recommendations && strategyResult.recommendations.length > 0 && (
+              <div className="bg-white/10 rounded-lg p-6 mb-6">
+                <h3 className="text-white font-semibold mb-4">💡 Investment Recommendations</h3>
+                <ul className="space-y-2">
+                  {strategyResult.recommendations.map((recommendation, index) => (
+                    <li key={index} className="flex items-start space-x-3">
+                      <span className="text-pink-400 mt-1">•</span>
+                      <span className="text-white/90 text-sm">{recommendation}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {/* Risk Factors */}
+            {strategyResult.riskFactors && strategyResult.riskFactors.length > 0 && (
+              <div className="bg-white/10 rounded-lg p-6 mb-6">
+                <h3 className="text-white font-semibold mb-4">⚠️ Risk Factors to Monitor</h3>
+                <ul className="space-y-2">
+                  {strategyResult.riskFactors.map((risk, index) => (
+                    <li key={index} className="flex items-start space-x-3">
+                      <span className="text-red-400 mt-1">•</span>
+                      <span className="text-white/90 text-sm">{risk}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {/* Tax Considerations */}
+            {strategyResult.taxConsiderations && strategyResult.taxConsiderations.length > 0 && (
+              <div className="bg-white/10 rounded-lg p-6 mb-6">
+                <h3 className="text-white font-semibold mb-4">💰 Tax Considerations</h3>
+                <ul className="space-y-2">
+                  {strategyResult.taxConsiderations.map((tax, index) => (
+                    <li key={index} className="flex items-start space-x-3">
+                      <span className="text-green-400 mt-1">•</span>
+                      <span className="text-white/90 text-sm">{tax}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {/* Portfolio Management */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+              {strategyResult.rebalancing && (
+                <div className="bg-white/10 rounded-lg p-4">
+                  <h3 className="text-white font-semibold mb-2">🔄 Rebalancing</h3>
+                  <p className="text-white/70 text-sm">{strategyResult.rebalancing}</p>
+                </div>
+              )}
+              
+              {strategyResult.monitoring && (
+                <div className="bg-white/10 rounded-lg p-4">
+                  <h3 className="text-white font-semibold mb-2">📈 Monitoring</h3>
+                  <p className="text-white/70 text-sm">{strategyResult.monitoring}</p>
+                </div>
+              )}
             </div>
 
             <div className="mt-6 text-center">
